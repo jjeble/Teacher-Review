@@ -1,0 +1,150 @@
+<html>
+<head>
+{% if title %}
+<title>{{title}}- TeacherReview</title>
+{% else %}
+<title>Welcome to TeacherReview</title>
+{% endif %}
+
+</head>
+<body>
+{% if a %}
+{% extends "base.html" %}
+{% else %}
+{% extends "loginbase.html" %}
+{% endif %}
+{% block content %}
+
+<br><br><br>
+<div style="text-align:center;">
+   <div class="form-group">
+   <h1>Enter the name of the teacher you want to search for</h1>
+	<form action="http://localhost:5000/teacher_search/1#" method ="post" name = "teacher" autocomplete="off">
+	{{ form.hidden_tag() }}
+        {% if posts %}
+        <input list="teachers" name="teacher" value="{{posts[0].teacher.name}}">    <span class="glyphicon glyphicon-search"></span>
+        {% else %}
+        <input list="teachers" name="teacher">   <span class="glyphicon glyphicon-search"></span>
+        {% endif %}
+        
+	<datalist id="teachers">
+	<option value="Top results: " style="background-color:pink;">
+        {% for post in posts1[:10] %}
+  	<option value="{{post}}">
+  	{% endfor %}
+        </datalist>
+        </div>
+        {% for error in form.teacher.errors %}
+       <div class="bg-warning"><span style="color:red;">[{{error}}]</span></div>
+         {% endfor %}
+       <br><br>
+       <p><button type = "submit" class="btn btn-primary btn-md">Submit!</button></p>
+
+        </form>
+</div>
+<br><br>
+<div class="container" style="text-align:center;">
+{% if posts %}
+
+<div style = "border: red solid 5px;">
+<div class = "panel panel-primary">
+<div class="panel-heading" style="background-color:black;"><h2 style="text-align:center;">{{posts[0].teacher.name}}<span style="color:lavender;font-size:22">  {{posts[0].teacher.college}}</span></h2></div>
+<div class="panel-body" style="background-image:url(http://hdwallnpics.com/wp-content/gallery/nice-background-images/Blue-wavy-nice-background.jpg);">      
+{% if image <= 10  and image> 7 %}
+<h4 style="text-align:center;">Average Grade: <span class="badge" style="color:green;background-color:lavender;font-family:comic-sans;font-size:24px;"> {{avg}} </span> </h4>
+<h4 style="text-align:center;">Average Rating: <span class="badge"  style="color:green;background-color:lavender;font-family:comic-sans;font-size:24px;"> {{avg1}}</span></h4>
+<h4 style="text-align:center;font-family:comic-sans;"><span class="badge" style="color:green;background-color:lavender;font-size:24px;"> AWESOME! </span><img src="http://quizsocial.com/quimg/emoticon-knowledge/results/6.jpg" style="height:50px;width="50px;"</img></h4>
+{% elif image >4 and image<=7 %}
+<h4 style="text-align:center;">Average Grade: <span class="badge" style="color:magenta;background-color:lavender;font-family:comic-sans;font-size:24px;"> {{avg}} </span> </h4>
+<h4 style="text-align:center;">Average Rating: <span class="badge" style="color:magenta;background-color:lavender;font-family:comic-sans;font-size:24px;"> {{avg1}}</span></h4>
+<h4 style="text-align:center;font-family:comic-sans;"><span class="badge" style="color:magenta;background-color:lavender;font-size:24px;"> AVERAGE </span><img src="http://img3.wikia.nocookie.net/__cb20130225110957/clubpenguin/images/9/90/Hmm_Emoticon.png" style="height:50px;width="50px;"</img></h4>
+{% elif image <=4 and image>0 %}
+<h4 style="text-align:center;">Average Grade: <span class="badge"  style="color:red;background-color:lavender;font-family:comic-sans;font-size:24px;"> {{avg}} </span> </h4>
+<h4 style="text-align:center;">Average Rating: <span class="badge"  style="color:red;background-color:lavender;font-family:comic-sans;font-size:24px;"> {{avg1}}</span></h4>
+<h4 style="text-align:center;font-family:comic-sans;"><span class="badge" style="color:red;background-color:lavender;font-size:24px;"> POOR </span><img src="http://1.bp.blogspot.com/-34LQZfyXLXY/TjwvzRF_F6I/AAAAAAAAAAw/hlZZap4Xy_0/s1600/Brightwing+Full+Cover.jpg" style="height:50px;width="50px;"</img></h4>
+{% endif %}
+<h4 style="text-align:center;"><span class="label label-info">{{num}} Reviews</span></h4>
+
+</div></div></div><br><br><br>
+{% for post in posts %}
+<div style="border: groove red 5px;background-image:url(https://images4.alphacoders.com/117/117354.jpg);">
+<div class = "row">
+<div class = "col-sm-1">k</div>
+
+ <div class = "col-sm-4">
+ <div style="border-right:thick solid #ff0000;" >
+<br><br><br><br>
+     <div class="panel panel-primary">
+        <div class="panel-heading">
+     {% if post.anon == "False" or post.anon == None %}
+
+        <div>{{adict[post]}} ago<br><br>Post by <div style="font-family:Verdana;font-size:20px;">{{post.author.nickname}}</div></div><br><br>
+      {% elif post.anon == "True" %}
+        <div>{{adict[post]}} ago<br><br>Post by <div style="font-family:Verdana;font-size:20px;">Anonymous User</div></div><br><br>
+
+      {% endif %}
+        </div></div>
+	<div class="panel panel-{{ddict[post]}}">
+        <div class="panel-heading">
+        <div style="font-family:Verdana;font-size:20px;">Overall Rating: <b>{{post.rating}}</b></div><br></div></div>
+        <div class="panel panel-{{cdict[post]}}">
+        <div class="panel-heading">
+        <div style="font-family:Verdana;font-size:20px;">Grade Recieved: <b>{{post.grade}}</b></div></div></div>
+        
+   <br><br>
+   </div></div>
+   <div class = "col-sm-6">
+	
+        <div class="panel-group">
+        <div class ="panel panel-primary">
+         
+        <div style="text-decoration: underline;background-color:black;" class="panel-heading"><h3>{{post.teacher.name}}</h3></div>
+        <div class="panel-body" style="background-color:#ffe34d;">
+	<div class="vlLine" style="border-top: thick solid #ff0000;">
+        <br><div style="font-size:20px;"> Subject :{{post.teacher.subject}}</div>
+        <br><br></div>
+        
+        <div id = "test1"><b>{{post.body}} </b> </div>
+    </div></div>
+    
+   
+</div></div></div></div>
+{% endfor %}
+
+<br><br>
+<div style="text-align:center;">
+<ul class="pagination" style="align:center;">
+{% for p in times %}
+{% if p == page %}
+<li  class ="active"><a title = {{p}} href="http://localhost:5000/teacher_search/{{p}}#">{{ p }}</a><li>
+{% else %}
+<li ><a title = {{p}} href="http://localhost:5000/teacher_search/{{p}}#">{{ p }}</a><li>
+{% endif %}
+{% endfor %}
+</ul>
+</div>
+{% endif %}
+<script>
+function checkcolor(image)
+{
+    if(image <= 10  && image> 7)
+         { 
+            return "green"
+         }
+    else if(image<= 7 && image > 4)
+         { 
+            return "magenta"
+         }
+   else if(image<=4 && image >0)
+        {
+           return "red"
+   	}
+}
+
+</script>
+
+{% endblock %}
+
+       
+
+

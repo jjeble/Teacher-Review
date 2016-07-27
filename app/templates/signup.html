@@ -1,0 +1,48 @@
+<body>
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1 style = "text-align:center;"> Login Page </h1>
+
+<form action = "" method = "post" name = "signup" style = "border: solid red 3px;text-align:center;">
+{{form.hidden_tag()}}
+<p>
+   Please enter your desired username:<br>
+   <span class="glyphicon glyphicon-user"></span>    {{form.username(size=80)}}<br>
+   {% for error in form.username.errors %}
+    <span style="color:red;">[{{error}}]</span>
+   {% endfor %}<br>
+</p> 
+<p>
+   Please enter your  desired password:<br>
+   <span class="glyphicon glyphicon-lock"></span>    {{form.password(size=80)}}<br>
+   {% for error in form.password.errors %}
+    <span style="color:red;">[{{error}}]</span>
+   {% endfor %}<br>
+</p>
+<p>
+   Please enter your  desired email-id:<br>
+   <span class="glyphicon glyphicon-envelope"></span>    {{form.emailid(size=80)}}<br>
+   {% for error in form.emailid.errors %}
+    <span style="color:red;">[{{error}}]</span>
+   {% endfor %}<br>
+</p>
+<p>
+   Please enter your  desired nickname:<br>
+   <span class="glyphicon glyphicon-user"></span>    {{form.nickname(size=80)}}<br>
+   {% for error in form.nickname.errors %}
+    <span style="color:red;">[{{error}}]</span>
+   {% endfor %}<br>
+</p>
+<p>
+   Please enter which college you go to:<br>
+   <span class="glyphicon glyphicon-home"></span>    {{form.college(size=80)}}<br>
+   {% for error in form.college.errors %}
+    <span style="color:red;">[{{error}}]</span>
+   {% endfor %}<br>
+</p>
+
+<p><button type = "submit" class="btn btn-primary btn-md">Sign Up</button></p>
+</form>
+{% endblock %}

@@ -1,0 +1,39 @@
+<body>
+
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<h1 style = "text-align:center;"> Login Page </h1>
+<div style = "text-align:center;">
+{% if msg %}
+
+<div class=" alert alert-warning fade in bg-warning"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><span style="color:red;">{{msg}}</span></div>
+{% endif %}
+<form role = "form" action = "" method = "post" name = "login" style = "border: solid red 3px;">
+
+{{form.hidden_tag()}}
+<p>
+   <div class="form-group">
+   Please enter your username:<br>
+   <span class="glyphicon glyphicon-user"></span>    {{form.username(size=80)}}<br>
+   {% for error in form.username.errors %}
+    <div class=" alert alert-warning fade in bg-warning"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><span style="color:red;">[{{error}}]</span></div>
+   {% endfor %}<br>
+</div>
+</p> 
+<p>
+   <div class="form-group">
+   Please enter your password:<br>
+   <span class="glyphicon glyphicon-lock"></span>    {{form.password(size=80)}}<br>
+   {% for error in form.password.errors %}
+   <div class="alert alert-warning fade in bg-warning"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> <span style="color:red;">[{{error}}]</span></div>
+   {% endfor %}<br>
+</div>
+</p>
+<p>{{ form.remember_me }} Remember Me</p>
+<p><button type = "submit" class="btn btn-primary btn-md">Sign In</button></p>
+</form>
+</div>
+{% endblock %}

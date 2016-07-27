@@ -1,0 +1,86 @@
+<html>
+<head>
+{% if title %}
+<title>{{title}}- TeacherReview</title>
+{% else %}
+<title>Welcome to TeacherReview</title>
+{% endif %}
+<style>
+
+</style>
+
+</head>
+<body>
+{% if a %}
+{% extends "base.html" %}
+{% else %}
+{% extends "loginbase.html" %}
+{% endif %}
+{% block content %}
+<br><br><br><br>
+<h1>Review a particular teacher from your college!</h1>
+
+<div class="container">
+<div class = "form-group" style="text-align:center;">
+<form action="" method ="post" name = "post" role = "form">
+{{ form.hidden_tag() }}
+
+   <div class = "form-group">
+   <label for="name">Name of teacher:</label>
+   <input type = "text" class="form-control" name="teacher" id = "teacher"> 
+    </div>
+   {% for error in form.teacher.errors %}
+   <div class="bg-warning"><span style = "color:red;">[{{error}}]</span><br></div>
+   {% endfor %}
+ <div class = "form-group">
+   <label for="subject">Subject taught by teacher:</label>
+   <input type = "text" class="form-control" name="subject" id = "subject"> 
+  </div> 
+   {% for error in form.subject.errors %}
+   <div class="bg-warning"><span style = "color:red;">[{{error}}]</span><br></div>
+   {% endfor %}
+  <div class = "form-group">
+   <label for="name">College:</label>
+   <input type = "text" class="form-control" name="college" id = "college" value = "{{college}}"> 
+  </div>
+   {% for error in form.college.errors %}
+   <div class="bg-warning"><span style = "color:red;">[{{error}}]</span><br></div>
+   {% endfor %}
+  <br><br>
+   <div class = "form-group">
+   <b>Make your review</b><br>
+   <textarea name="post" rows = "10" cols="75"></textarea> 
+   </div>
+   {% for error in form.post.errors %}
+   <div class="bg-warning"><span style = "color:red;">[{{error}}]</span><br></div>
+   {% endfor %}
+  
+
+<div class = "form-group">
+   <label for="grade">Grade recieved in class(out of 10)</label>
+   <input type = "text" class="form-control" name="grade" id = "grade"> 
+</div>    
+   {% for error in form.grade.errors %}
+   <div class="bg-warning"><span style = "color:red;">[{{error}}]</span><br></div>
+   {% endfor %}
+  
+<div class = "form-group">
+   <label for="rating">Overall rating you would give the teacher:</label>
+   <input type = "text" class="form-control" name="rating" id = "rating"> 
+</div>   
+   {% for error in form.rating.errors %}
+   <div class="bg-warning"><span style = "color:red;">[{{error}}]</span><br></div>
+   {% endfor %}
+   
+<br><br>
+
+    Post as anonymous? {{ form.anon }}
+<br><br>
+      <p><button type = "submit" class="btn btn-primary btn-md">Post!</button></p>
+     
+</form>
+</div>
+
+{% endblock %}
+
+    

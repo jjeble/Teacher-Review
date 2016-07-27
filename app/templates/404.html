@@ -1,0 +1,9 @@
+{% if a %}
+{% extends "base.html" %}
+{% else %}
+{% extends "loginbase.html" %}
+{% endif %}
+{% block content %}
+<h1>File not found</h1>
+<p><a href ="{{ url_for('homepage') }}">Back</a><p>
+<% endblock %>

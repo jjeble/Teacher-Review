@@ -1,0 +1,109 @@
+
+<html>
+<head>
+{% if title %}
+<title>{{title}}- TeacherReview</title>
+{% else %}
+<title>Welcome to TeacherReview</title>
+{% endif %}
+<style>
+div#test1 {
+    
+    font-size: 15.5px;
+    }
+div{text-align-justify;
+h1{
+    text-shadow: 2px 2px 5px red;
+}
+   
+}
+
+</style>
+</head>
+
+<body>
+{% if a %}
+{% extends "base.html" %}
+{% else %}
+{% extends "loginbase.html" %}
+{% endif %}
+{% block content %}
+<div style="text-align:center;">
+<br><br><br>
+<h1 style ="text-shadow: 2px 2px 5px blue;">  Hello, {{user.nickname}}!</h1>
+<h2 style ="text-shadow: 2px 2px 5px black;">Welcome</h2>
+
+{% if a %}
+<div style="text-align:center;"><img class="img-rounded" alt="Prof interacting with students" src="http://www.usnews.com/cmsmedia/c0/9b9ed900906a15a0a63b235cb884f0/32685FE_DA_0917prof.students.jpg"></img><div><br><br><br>
+{% else %}
+<h3 style ="text-shadow: 2px 2px 5px lightblue;"> Top results for your college include: </h3><br><br><br>
+{% endif %}
+</div>
+<br><br>
+<div class="container">
+
+
+{% for post in posts %}
+<div style="border: groove red 5px;background-image:url(https://images4.alphacoders.com/117/117354.jpg);">
+<div class = "row">
+<div class = "col-sm-1">k</div>
+
+ <div class = "col-sm-4">
+ <div style="border-right:thick solid #ff0000;" >
+<br><br><br><br>
+     <div class="panel panel-primary">
+        <div class="panel-heading">
+     {% if post.anon == "False" or post.anon == None %}
+
+        <div>{{adict[post]}} ago<br><br>Post by <div style="font-family:Verdana;font-size:20px;">{{post.author.nickname}}</div></div><br><br>
+      {% elif post.anon == "True" %}
+        <div>{{adict[post]}} ago<br><br>Post by <div style="font-family:Verdana;font-size:20px;">Anonymous User</div></div><br><br>
+
+      {% endif %}
+        </div></div>
+	<div class="panel panel-{{ddict[post]}}">
+        <div class="panel-heading">
+        <div style="font-family:Verdana;font-size:20px;">Overall Rating: <b>{{post.rating}}</b></div><br></div></div>
+        <div class="panel panel-{{cdict[post]}}">
+        <div class="panel-heading">
+        <div style="font-family:Verdana;font-size:20px;">Grade Recieved: <b>{{post.grade}}</b></div></div></div>
+        
+   <br><br>
+   </div></div>
+   <div class = "col-sm-6">
+	
+        <div class="panel-group">
+        <div class ="panel panel-primary">
+         
+        <div style="text-decoration: underline;background-color:black;" class="panel-heading"><h3>{{post.teacher.name}}</h3></div>
+        <div class="panel-body" style="background-color:#ffe34d;">
+	<div class="vlLine" style="border-top: thick solid #ff0000;">
+        <br><div style="font-size:20px;"> Subject :{{post.teacher.subject}}</div>
+        <br><br></div>
+        
+        <div id = "test1"><b>{{post.body}} </b> </div>
+    </div></div>
+    
+   
+</div></div></div></div>
+
+{% endfor %}
+</div>
+<div style="text-align:center;">
+<ul class="pagination" >
+{% for p in times %}
+{% if p == page %}
+<li class ="active"><a title = {{p}} href="http://localhost:5000/homepage/{{p}}#">{{ p }}</a><li>
+{% else %}
+<li><a title = {{p}} href="http://localhost:5000/homepage/{{p}}#">{{ p }}</a><li>
+{% endif %}
+{% endfor %}
+</ul>
+</div>
+{% endblock %}
+</body>
+<script>
+var stop = 10;
+</script>
+</html>
+

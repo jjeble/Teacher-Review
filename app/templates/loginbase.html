@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>{{title}}- TeacherReview</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <style>
+  body{ background-image:url("https://cdn.elegantthemes.com/blog/wp-content/uploads/2013/09/bg-11-full.jpg");background-size: cover;}
+  </style>
+  
+</head>
+
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="http://localhost:5000/#">TeacherReview</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="#">Home</a></li>
+      <li><a href="http://localhost:5000/teacher_search">Find a Teacher</a></li>
+      <li><a href="http://localhost:5000/college_search">Find a College</a></li>
+      <li><a href="http://localhost:5000/post">Make a post</a></li></ul>
+      <ul class="nav navbar-nav navbar-right">
+      
+      <li><a href="http://localhost:5000/logout#"}">Logout</a></li>
+      
+       	
+      
+  </ul>
+  </div>
+</nav>
+  
+<hr>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<ul>
+{% for message in messages %}
+<li>{{ message }}</li>
+{% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+
+{% block content %}{% endblock %}
+<div id = "time" style= "color:white;border: 2px solid white;background-color:black;text-align:center;" ></div>
+<script>
+function time(){
+    document.getElementById("time").innerHTML=Date();
+    }
+setInterval(time, 1000);
+</script>
+
+</body>
+
+
+</html>
